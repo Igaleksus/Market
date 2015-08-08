@@ -1,6 +1,7 @@
 package View;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.awt.*;
 import java.awt.peer.LabelPeer;
 
@@ -9,12 +10,12 @@ import java.awt.peer.LabelPeer;
  */
 public class UIRealisation implements UI {
     private JFrame mainFrame;
+
     private JButton[][] buttons;
     private JPanel mainPanel;
     private JPanel[] lines;
     private JPanel[] cells;
     private JPanel[] downPanels;
-    private JPanel[] centerPanels;
 
     @Override
     public void init() {
@@ -34,6 +35,7 @@ public class UIRealisation implements UI {
 
         for (int i = 0; i < cells.length; i++){
             cells[i] = new JPanel();
+            cells[i].setBorder(new BevelBorder(BevelBorder.RAISED));
             cells[i].setLayout(new BorderLayout());
             if (i < 4 && i >= 0){
                 lines[0].add(cells[i]);
@@ -48,7 +50,7 @@ public class UIRealisation implements UI {
 
         for (int i = 0; i < downPanels.length; i++){
             downPanels[i] = new JPanel();
-            downPanels[i].setLayout(new BoxLayout(downPanels[i], BoxLayout.X_AXIS));
+            downPanels[i].setLayout(new GridBagLayout());
 //            downPanels[i].add(new JPanel());
         }
 
@@ -58,14 +60,15 @@ public class UIRealisation implements UI {
                 buttons[i][b] = new JButton();
                 switch (b){
                     case 0:
+                        buttons[i][b].setIcon(new ImageIcon("/Users/mac/Desktop/MAIN/ПРОГРАММИРОВАНИЕ/progschool/java2/PROJECTS/Market/src/View/img/kapusta.jpg"));
                         JPanel lPanel = new JPanel();
                         lPanel.setLayout(new GridBagLayout());
-                        lPanel.add(new JPanel(), new GridBagConstraints(0, 0, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
-                        lPanel.add(buttons[i][b], new GridBagConstraints(0, 1, 1, 1, 1, 2, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-                        lPanel.add(new JPanel(), new GridBagConstraints(0, 2, 1, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+                        lPanel.add(buttons[i][b], new GridBagConstraints(0, 1, 2, 2, 4, 3, GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+                        lPanel.add(new JPanel(), new GridBagConstraints(0, 2, 0, 1, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
                         cells[i].add(lPanel, BorderLayout.CENTER);
                         break;
                     case 1:
+                        buttons[i][b].setText("←");
                         JPanel sPanel = new JPanel();
                         sPanel.setLayout(new BoxLayout(sPanel, BoxLayout.Y_AXIS));
                         sPanel.add(new JPanel());
@@ -74,6 +77,7 @@ public class UIRealisation implements UI {
                         cells[i].add(sPanel, BorderLayout.WEST);
                         break;
                     case 2:
+                        buttons[i][b].setText("↑");
                         JPanel rPanel = new JPanel();
                         rPanel.setLayout(new BoxLayout(rPanel, BoxLayout.X_AXIS));
                         rPanel.add(new JPanel());
@@ -82,6 +86,7 @@ public class UIRealisation implements UI {
                         cells[i].add(rPanel, BorderLayout.NORTH);
                         break;
                     case 3:
+                        buttons[i][b].setText("→");
                         JPanel yPanel = new JPanel();
                         yPanel.setLayout(new BoxLayout(yPanel, BoxLayout.Y_AXIS));
                         yPanel.add(new JPanel());
@@ -90,32 +95,27 @@ public class UIRealisation implements UI {
                         cells[i].add(yPanel, BorderLayout.EAST);
                         break;
                     case 4:
-                        downPanels[i].add(buttons[i][b]);
+                        downPanels[i].add(buttons[i][b], new GridBagConstraints(0, 1, 0, 0, 1, 1, GridBagConstraints.LINE_START, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
                         cells[i].add(downPanels[i], BorderLayout.SOUTH);
+                        buttons[i][b].setText("...");
                         break;
                     case 5:
-                        downPanels[i].add(buttons[i][b]);
+                        buttons[i][b].setText("↓");
+                        downPanels[i].add(buttons[i][b], new GridBagConstraints(1, 1, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
                         break;
                     case 6:
-                        downPanels[i].add(buttons[i][b]);
+                        downPanels[i].add(buttons[i][b], new GridBagConstraints(2, 1, 0, 0, 1, 1, GridBagConstraints.LINE_END, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
+                        buttons[i][b].setText("X");
                         break;
                 }
             }
         }
 
-
-
         mainFrame.add(mainPanel);
-
-        mainFrame.setSize(700, 700);
-//        mainFrame.setResizable(false);
+        mainFrame.setSize(950, 580);
+        mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
-
-//        mainPanel.setLayout(new );
-
-
-
     }
 
     public static void main(String[] args) {
@@ -123,4 +123,11 @@ public class UIRealisation implements UI {
         uiRealisation.init();
     }
 
+    public JButton[][] getButtons() {
+        return buttons;
+    }
+
+    public void setButtons(JButton[][] buttons) {
+        this.buttons = buttons;
+    }
 }

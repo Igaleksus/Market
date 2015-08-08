@@ -5,7 +5,7 @@ package Model;
  */
 public class Product {
     private String name;
-    public int id = 0;
+    private int id = 0;
     private String description;
     public static int productsCount = 0;
 
