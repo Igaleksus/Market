@@ -1,4 +1,8 @@
 import Controller.Controller;
+import Model.Product;
+import View.DescriptionPanel;
+
+import javax.swing.*;
 
 /**
  * Created by mac on 08.06.15.

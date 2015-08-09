@@ -1,10 +1,14 @@
 package Controller;
 
 import Model.Product;
+import View.DescriptionPanel;
 import View.UI;
 import View.UIRealisation;
+import oracle.jrockit.jfr.JFR;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -37,10 +41,6 @@ public class Controller {
         createProductsFromImageFiles();
         randomizeProducts();
         bindProductsToUI();
-    }
-
-    public static void main(String[] args) {
-        new Controller();
     }
 
     private ArrayList<Product> createProductsFromImageFiles(){
@@ -99,9 +99,17 @@ public class Controller {
             for (int b = 0; b < buttons[i].length; b++){
                 switch (b){
                     case 0:
+                        final int j = i;
                         buttons[i][b].setIcon(products.get(i).getSmallImage());
                         products.get(i).setId(i + 1);
                         buttons[i][b].setToolTipText("№" + products.get(i).getId() + " " + products.get(i).getName());
+                        buttons[i][b].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                DescriptionPanel descriptionPanel = new DescriptionPanel();
+                                descriptionPanel.init(j, products.get(j));
+                            }
+                        });
                     default:
                         break;
                 }
@@ -111,6 +119,11 @@ public class Controller {
 
     private void addActionListenersToUI(){
 
+    }
+
+    private JFrame frameWithInformationForIndex(int p){
+
+        return null;
     }
 
 
