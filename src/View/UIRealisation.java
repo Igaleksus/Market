@@ -1,5 +1,7 @@
 package View;
 
+import oracle.jrockit.jfr.JFR;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import java.awt.*;
@@ -17,8 +19,19 @@ public class UIRealisation implements UI {
     private JPanel[] cells;
     private JPanel[] downPanels;
 
+    private static UIRealisation instance;
+
+    private UIRealisation(){}
+
+    public static synchronized UIRealisation getInstance(){
+        if (instance == null){
+            instance = new UIRealisation();
+        }
+        return instance;
+    }
+
     @Override
-    public void init() {
+    public JFrame init() {
         mainFrame = new JFrame();
         buttons = new JButton[16][7];
         lines = new JPanel[4];
@@ -116,6 +129,8 @@ public class UIRealisation implements UI {
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+
+        return mainFrame;
     }
 
     public static void main(String[] args) {
@@ -129,5 +144,45 @@ public class UIRealisation implements UI {
 
     public void setButtons(JButton[][] buttons) {
         this.buttons = buttons;
+    }
+
+    public JPanel[] getCells() {
+        return cells;
+    }
+
+    public void setCells(JPanel[] cells) {
+        this.cells = cells;
+    }
+
+    public JPanel[] getDownPanels() {
+        return downPanels;
+    }
+
+    public void setDownPanels(JPanel[] downPanels) {
+        this.downPanels = downPanels;
+    }
+
+    public JPanel[] getLines() {
+        return lines;
+    }
+
+    public void setLines(JPanel[] lines) {
+        this.lines = lines;
+    }
+
+    public JFrame getMainFrame() {
+        return mainFrame;
+    }
+
+    public void setMainFrame(JFrame mainFrame) {
+        this.mainFrame = mainFrame;
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    public void setMainPanel(JPanel mainPanel) {
+        this.mainPanel = mainPanel;
     }
 }
