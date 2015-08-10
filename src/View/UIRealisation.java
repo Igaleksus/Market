@@ -81,6 +81,7 @@ public class UIRealisation implements UI {
                         cells[i].add(lPanel, BorderLayout.CENTER);
                         break;
                     case 1:
+                        if (i == 0 || i == 4 || i == 8 || i == 12) buttons[i][b].setEnabled(false);
                         buttons[i][b].setText("←");
                         JPanel sPanel = new JPanel();
                         sPanel.setLayout(new BoxLayout(sPanel, BoxLayout.Y_AXIS));
@@ -90,6 +91,7 @@ public class UIRealisation implements UI {
                         cells[i].add(sPanel, BorderLayout.WEST);
                         break;
                     case 2:
+                        if (i >= 0 && i <= 3) buttons[i][b].setEnabled(false);
                         buttons[i][b].setText("↑");
                         JPanel rPanel = new JPanel();
                         rPanel.setLayout(new BoxLayout(rPanel, BoxLayout.X_AXIS));
@@ -99,6 +101,7 @@ public class UIRealisation implements UI {
                         cells[i].add(rPanel, BorderLayout.NORTH);
                         break;
                     case 3:
+                        if (i == 3 || i == 7 || i == 11 || i == 15) buttons[i][b].setEnabled(false);
                         buttons[i][b].setText("→");
                         JPanel yPanel = new JPanel();
                         yPanel.setLayout(new BoxLayout(yPanel, BoxLayout.Y_AXIS));
@@ -113,6 +116,7 @@ public class UIRealisation implements UI {
                         buttons[i][b].setText("...");
                         break;
                     case 5:
+                        if (i > 11 && i < 16) buttons[i][b].setEnabled(false);
                         buttons[i][b].setText("↓");
                         downPanels[i].add(buttons[i][b], new GridBagConstraints(1, 1, 0, 0, 1, 1, GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 0, 0), 0, 0));
                         break;

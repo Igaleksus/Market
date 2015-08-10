@@ -110,6 +110,14 @@ public class Controller {
                                 descriptionPanel.init(j, products.get(j));
                             }
                         });
+                    case 1:
+                        buttons[i][b].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+
+                            }
+                        });
+                        break;
                     default:
                         break;
                 }
