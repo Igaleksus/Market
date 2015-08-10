@@ -97,14 +97,16 @@ public class Controller {
         final JButton[][] buttons = ui.getButtons();
         for (int i = 0; i < buttons.length; i++){
             for (int b = 0; b < buttons[i].length; b++){
+                final int y = i;
+                final int v = b;
                 switch (b){
                     case 0:
                         final int j = i;
                         final int p = b;
-                        buttons[i][b].setIcon(products.get(i).getSmallImage());
-                        products.get(i).setId(i + 1);
-                        buttons[i][b].setToolTipText("№" + products.get(i).getId() + " " + products.get(i).getName());
-                        buttons[i][b].addActionListener(new ActionListener() {
+                        buttons[y][p].setIcon(products.get(y).getSmallImage());
+                        products.get(y).setId(y + 1);
+                        buttons[y][p].setToolTipText("№" + products.get(y).getId() + " " + products.get(y).getName());
+                        buttons[y][p].addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 DescriptionPanel descriptionPanel = new DescriptionPanel();
@@ -113,8 +115,7 @@ public class Controller {
                         });
                         break;
                     case 1:
-                        final int y = i;
-                        final int v = b;
+
                         buttons[i][b].addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
@@ -123,10 +124,12 @@ public class Controller {
                                     products.get(y - 1).setName(rightProduct.getName());
                                     products.get(y - 1).setSmallImage(rightProduct.getSmallImage());
                                     products.get(y - 1).setZoomedImage(rightProduct.getZoomedImage());
+                                    products.get(y - 1).setDescription(rightProduct.getDescription());
 
                                     products.get(y).setName(leftProduct.getName());
                                     products.get(y).setSmallImage(leftProduct.getSmallImage());
                                     products.get(y).setZoomedImage(leftProduct.getZoomedImage());
+                                    products.get(y).setDescription(leftProduct.getDescription());
 
                                     buttons[y][v - 1].setToolTipText("№" + products.get(y).getId() + " " + products.get(y).getName());
                                     buttons[y - 1][v - 1].setToolTipText("№" + products.get(y - 1).getId() + " " + products.get(y - 1).getName());
@@ -137,7 +140,56 @@ public class Controller {
                         });
                         break;
                     case 2:
-                        
+                        buttons[y][v].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Product upperProduct = new Product(products.get(y - 4).getName(), products.get(y - 4).getId(), products.get(y - 4).getSmallImage(), products.get(y - 4).getZoomedImage());
+                                Product downProduct = new Product(products.get(y).getName(), products.get(y).getId(), products.get(y).getSmallImage(), products.get(y).getZoomedImage());
+
+                                products.get(y - 4).setName(downProduct.getName());
+                                products.get(y - 4).setSmallImage(downProduct.getSmallImage());
+                                products.get(y - 4).setZoomedImage(downProduct.getZoomedImage());
+                                products.get(y - 4).setDescription(downProduct.getDescription());
+
+                                products.get(y).setName(upperProduct.getName());
+                                products.get(y).setSmallImage(upperProduct.getSmallImage());
+                                products.get(y).setZoomedImage(upperProduct.getZoomedImage());
+                                products.get(y).setDescription(upperProduct.getDescription());
+
+                                buttons[y][v - 2].setToolTipText("№" + products.get(y).getId() + " " + products.get(y).getName());
+                                buttons[y - 4][v - 2].setToolTipText("№" + products.get(y - 4).getId() + " " + products.get(y - 4).getName());
+                                buttons[y][v - 2].setIcon(products.get(y).getSmallImage());
+                                buttons[y - 4][v - 2].setIcon(products.get(y - 4).getSmallImage());
+
+                            }
+                        });
+                        break;
+                    case 3:
+                        buttons[y][v].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Product rightProduct = new Product(products.get(y + 1).getName(), products.get(y + 1).getId(), products.get(y + 1).getSmallImage(), products.get(y + 1).getZoomedImage());
+                                Product leftProduct = new Product(products.get(y).getName(), products.get(y).getId(), products.get(y).getSmallImage(), products.get(y).getZoomedImage());
+
+                                products.get(y + 1).setName(leftProduct.getName());
+                                products.get(y + 1).setSmallImage(leftProduct.getSmallImage());
+                                products.get(y + 1).setZoomedImage(leftProduct.getZoomedImage());
+                                products.get(y + 1).setDescription(leftProduct.getDescription());
+
+                                products.get(y).setName(rightProduct.getName());
+                                products.get(y).setSmallImage(rightProduct.getSmallImage());
+                                products.get(y).setZoomedImage(rightProduct.getZoomedImage());
+                                products.get(y).setDescription(rightProduct.getDescription());
+
+                                buttons[y][v - 3].setToolTipText("№" + products.get(y).getId() + " " + products.get(y).getName());
+                                buttons[y + 1][v - 3].setToolTipText("№" + products.get(y + 1).getId() + " " + products.get(y + 1).getName());
+                                buttons[y][v - 3].setIcon(products.get(y).getSmallImage());
+                                buttons[y + 1][v - 3].setIcon(products.get(y + 1).getSmallImage());
+
+                            }
+                        });
+                        break;
+                    case 5:
                         break;
                     default:
                         break;
