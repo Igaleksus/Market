@@ -94,12 +94,13 @@ public class Controller {
     }
 
     private void bindProductsToUI(){
-        JButton[][] buttons = ui.getButtons();
+        final JButton[][] buttons = ui.getButtons();
         for (int i = 0; i < buttons.length; i++){
             for (int b = 0; b < buttons[i].length; b++){
                 switch (b){
                     case 0:
                         final int j = i;
+                        final int p = b;
                         buttons[i][b].setIcon(products.get(i).getSmallImage());
                         products.get(i).setId(i + 1);
                         buttons[i][b].setToolTipText("№" + products.get(i).getId() + " " + products.get(i).getName());
@@ -110,13 +111,33 @@ public class Controller {
                                 descriptionPanel.init(j, products.get(j));
                             }
                         });
+                        break;
                     case 1:
+                        final int y = i;
+                        final int v = b;
                         buttons[i][b].addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
+                                    Product rightProduct = new Product(products.get(y).getName(), products.get(y).getId(), products.get(y).getSmallImage(), products.get(y).getZoomedImage());
+                                    Product leftProduct = new Product(products.get(y - 1).getName(), products.get(y - 1).getId(), products.get(y - 1).getSmallImage(), products.get(y - 1).getZoomedImage());
+                                    products.get(y - 1).setName(rightProduct.getName());
+                                    products.get(y - 1).setSmallImage(rightProduct.getSmallImage());
+                                    products.get(y - 1).setZoomedImage(rightProduct.getZoomedImage());
 
-                            }
+                                    products.get(y).setName(leftProduct.getName());
+                                    products.get(y).setSmallImage(leftProduct.getSmallImage());
+                                    products.get(y).setZoomedImage(leftProduct.getZoomedImage());
+
+                                    buttons[y][v - 1].setToolTipText("№" + products.get(y).getId() + " " + products.get(y).getName());
+                                    buttons[y - 1][v - 1].setToolTipText("№" + products.get(y - 1).getId() + " " + products.get(y - 1).getName());
+                                    buttons[y][v - 1].setIcon(products.get(y).getSmallImage());
+                                    buttons[y - 1][v - 1].setIcon(products.get(y - 1).getSmallImage());
+                                }
+
                         });
+                        break;
+                    case 2:
+                        
                         break;
                     default:
                         break;
