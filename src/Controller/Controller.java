@@ -190,6 +190,28 @@ public class Controller {
                         });
                         break;
                     case 5:
+                        buttons[y][v].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Product downProduct = new Product(products.get(y + 4).getName(), products.get(y + 4).getId(), products.get(y + 4).getSmallImage(), products.get(y + 4).getZoomedImage());
+                                Product upperProduct = new Product(products.get(y).getName(), products.get(y).getId(), products.get(y).getSmallImage(), products.get(y).getZoomedImage());
+
+                                products.get(y + 4).setName(upperProduct.getName());
+                                products.get(y + 4).setSmallImage(upperProduct.getSmallImage());
+                                products.get(y + 4).setZoomedImage(upperProduct.getZoomedImage());
+                                products.get(y + 4).setDescription(upperProduct.getDescription());
+
+                                products.get(y).setName(downProduct.getName());
+                                products.get(y).setSmallImage(downProduct.getSmallImage());
+                                products.get(y).setZoomedImage(downProduct.getZoomedImage());
+                                products.get(y).setDescription(downProduct.getDescription());
+
+                                buttons[y][v - 5].setToolTipText("№" + products.get(y).getId() + " " + products.get(y).getName());
+                                buttons[y + 4][v - 5].setToolTipText("№" + products.get(y + 4).getId() + " " + products.get(y + 4).getName());
+                                buttons[y][v - 5].setIcon(products.get(y).getSmallImage());
+                                buttons[y + 4][v - 5].setIcon(products.get(y + 4).getSmallImage());
+                            }
+                        });
                         break;
                     default:
                         break;
