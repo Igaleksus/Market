@@ -189,6 +189,8 @@ public class Controller {
                             }
                         });
                         break;
+                    case 4:
+                        break;
                     case 5:
                         buttons[y][v].addActionListener(new ActionListener() {
                             @Override
@@ -213,6 +215,22 @@ public class Controller {
                             }
                         });
                         break;
+                    case 6:
+
+                        buttons[y][v].addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                buttons[y][v].setEnabled(false);
+                                buttons[y][v - 1].setEnabled(false);
+                                buttons[y][v - 2].setEnabled(false);
+                                buttons[y][v - 3].setEnabled(false);
+                                buttons[y][v - 4].setEnabled(false);
+                                buttons[y][v - 5].setEnabled(false);
+                                buttons[y][v - 6].setEnabled(false);
+                                buttons[y][v - 6].setToolTipText("NONE");
+                            }
+                        });
+                        break;
                     default:
                         break;
                 }
@@ -222,6 +240,11 @@ public class Controller {
 
     private void addActionListenersToUI(){
 
+    }
+
+    private boolean isDirectionIsEmpty(Directions direction, JButton button){
+
+        return false;
     }
 
     private JFrame frameWithInformationForIndex(int p){
